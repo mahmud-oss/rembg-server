@@ -11,7 +11,7 @@ const app = express();
 const PORT = 3005;
 const processedImagesDir = path.join(__dirname, 'processed_images');
 
-const getServerImageUrl = (imageFileName) => `http://localhost:${PORT}/images/${imageFileName}`;
+const getServerImageUrl = (imageFileName) => `https://rembg-server.vercel.app/:${PORT}/images/${imageFileName}`;
 
 // Create the 'processed_images' folder if it doesn't exist
 if (!fs.existsSync(processedImagesDir)) {
@@ -22,6 +22,7 @@ app.use(cors()); // Use the cors middleware to enable CORS
 app.use(express.json()); // Use built-in express.json() middleware to parse JSON data
 
 app.post('/rembg', async (req, res) => {
+    console.log("HIT rembg");
     const { imageUrl } = req.body;
     console.log(imageUrl);
 
@@ -122,6 +123,7 @@ app.post('/process-image', async (req, res) => {
 
 // This endpoint combines the smart cropping and the remove of background processes
 app.post('/process', async (req, res) => {
+    console.log("Hit process");
     const { imageUrl } = req.body;
     console.log(imageUrl);
 
